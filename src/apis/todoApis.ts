@@ -6,7 +6,7 @@ export async function fetchTodos(): Promise<[]> {
             .then(data => data)
 }
 
-export async function deleteTodo(todoId: number | undefined) {
+export async function deleteTodo(todoId: number | undefined): Promise<any> {
   return fetch(`${process.env.REACT_APP_ENPOINT}/todos/${todoId}`, {
     method: 'DELETE'
   })

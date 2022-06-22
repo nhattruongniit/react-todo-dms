@@ -105,6 +105,7 @@ const AddEditTodo = () => {
             autoFocus
             margin="dense"
             id="name"
+            data-testid="name"
             label="Title"
             type="text"
             fullWidth

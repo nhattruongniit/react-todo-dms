@@ -12,10 +12,11 @@ interface IProps {
   handleClose: () => void;
   handleSubmit: () => void;
   renderContext: React.ReactNode;
-  renderTitle: React.ReactNode
+  renderTitle: React.ReactNode;
+  buttonOkId?: string
 }
 
-export default function DialogSimple({ open, handleSubmit, handleClose, renderTitle, renderContext }: IProps) {
+export default function DialogSimple({ open, handleSubmit, handleClose, renderTitle, renderContext, buttonOkId = '' }: IProps) {
   return (
     <Dialog
       open={open}
@@ -32,7 +33,7 @@ export default function DialogSimple({ open, handleSubmit, handleClose, renderTi
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} color="error">Cancel</Button>
-        <Button onClick={handleSubmit} autoFocus>
+        <Button onClick={handleSubmit} autoFocus data-testid={buttonOkId}>
           Ok
         </Button>
       </DialogActions>

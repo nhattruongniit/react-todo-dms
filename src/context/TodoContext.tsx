@@ -23,7 +23,7 @@ type IContext = {
   handleDeleteTodo: (rowItem: ITodoItem) => () => void;
 };
 
-const initialState = {
+export const initialState = {
   openModal: 'confirm',
   todos: [],
   todoItem: null,

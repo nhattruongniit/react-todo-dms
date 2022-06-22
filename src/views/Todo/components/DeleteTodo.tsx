@@ -34,6 +34,7 @@ function DeleteTodo() {
       open={openModal === 'confirm'}
       handleClose={handleCloseModal}
       handleSubmit={handleSubmit}
+      buttonOkId="button-submit"
       renderTitle="Confirm"
       renderContext={
         <>

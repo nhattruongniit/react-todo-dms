@@ -11,6 +11,7 @@ function FabAdd({ ...props }) {
     <Fab 
       color="primary" 
       aria-label="add"
+      data-testid="add"
       sx={{
         position: 'absolute',
         bottom: '2rem',
