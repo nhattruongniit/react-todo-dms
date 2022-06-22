@@ -8,17 +8,17 @@ import Button from '@mui/material/Button';
 // components
 import { TableNutrition } from 'components/Table';
 import { FabAdd } from 'components/Fab';
-import { DialogConfirm } from 'components/Dialog';
+
+// context
+import { useTodoContext } from 'context/TodoContext';
 
 // sections
-import TodoAdd from './components/TodoAdd';
+import AddEditTodo from './components/AddEditTodo';
+import DeleteTodo from './components/DeleteTodo';
 
 // model
 import{ IHeadCell } from 'models/ITable';
 import { ITodoItem } from 'models/ITodo';
-
-// apis
-import * as todoApis from 'apis/todoApis';
 
 const headCells: IHeadCell[] = [
   {
@@ -39,59 +39,13 @@ const headCells: IHeadCell[] = [
 ];
 
 function Todo() {
-  const [todos, setTodos] = React.useState<ITodoItem[]>([]);
-  const [todoItem, setTodoItem] = React.useState<ITodoItem | null>(null);
-  const [openModalAdd, setOpenModalAdd] = React.useState(false);
+  const { todos, setTodoItem, handleOpenModal, handleDeleteTodo } = useTodoContext();
 
-  // initial todos
-  React.useEffect(() => {
-    async function _handleFetchTodos() {
-      try {
-        const data = await todoApis.fetchTodos();
-        setTodos(data)
-      } catch (err) {
-        // some thing error
-        console.log(err)
-      }
-    };
-    _handleFetchTodos();
-  }, []);
-
-  // delete todo
-  const handleDeleteTodo = (rowItem: ITodoItem) => () => {
-    setTodoItem(rowItem)
+  // edit todo
+  const handleEditTodo = (rowItem: ITodoItem) => () => {
+    handleOpenModal('edit');
+    setTodoItem(rowItem);
   }
-
-  function handleCloseModalConfirm() {
-    setTodoItem(null);
-  }
-
-  async  function handleSubmit() {
-    try {
-      await todoApis.deleteTodos(todoItem?.id);
-      setTodos(prevState => {
-        const newTodos = [...prevState];
-        const todoIndex: number = newTodos.findIndex((todo: ITodoItem) => todo.id === todoItem?.id);
-        newTodos.splice(todoIndex, 1);
-        return newTodos
-      });
-      handleCloseModalConfirm();
-    } catch (err) {
-      // some thing error
-      console.log(err)
-    }
-  }
-
-  // add todo
-  function showModalAddTodo() {
-    setOpenModalAdd(true);
-  }
-
-  function handleCloseModalAdd() {
-    setOpenModalAdd(false)
-  }
-
-  console.log(todos)
 
   return (
     <>
@@ -112,35 +66,22 @@ function Todo() {
               {rowItem.completed ? "Completed" : "New"}
             </TableCell>
             <TableCell align="left">
-              <Button variant="text">Edit</Button>  
+              <Button variant="text" onClick={handleEditTodo(rowItem)}>Edit</Button>  
               <Button variant="text" color='error' onClick={handleDeleteTodo(rowItem)}>Delete</Button>  
             </TableCell>
           </TableRow>
         )}
       />
 
-      {/* section dialog confirm */}
-      <DialogConfirm 
-        open={!!todoItem}
-        handleClose={handleCloseModalConfirm}
-        handleSubmit={handleSubmit}
-        renderContext={
-          <>
-            Do you want to delete id: <b>{todoItem?.id}</b> ?
-          </>
-        }
-      />
+      {/* delete todo */}
+      <DeleteTodo />
 
       {/* section dialog add todo */}
-      <TodoAdd 
-        open={openModalAdd}
-        handleClose={handleCloseModalAdd}
-        handleSubmit={() => {}}
-      />
+      <AddEditTodo  />
 
       {/* section button add */}
       <FabAdd 
-        onClick={showModalAddTodo}
+        onClick={() => handleOpenModal('add')}
       />
     </>
   )

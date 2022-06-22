@@ -26,4 +26,4 @@ function FabAdd({ ...props }) {
   )
 }
 
-export default React.memo(FabAdd);
+export default FabAdd;
