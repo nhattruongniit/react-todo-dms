@@ -13,7 +13,7 @@ import { ITodoItem } from 'models/ITodo';
 import { useTodoContext } from 'context/TodoContext';
 
 function DeleteTodo() {
-  const { openModal, todos, setTodos, todoItem, handleOpenModal, handleCloseModal } = useTodoContext();
+  const { openModal, todos, setTodos, todoItem, handleCloseModal } = useTodoContext();
 
   async function handleSubmit() {
     try {
