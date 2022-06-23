@@ -35,6 +35,7 @@ const TableNutrition: React.FC<IProps> = ({ headCells, rows, renderRows }) => {
                   key={headCell.id}
                   align={headCell.numeric ? 'right' : 'left'}
                   padding="normal"
+                  data-testid={headCell.dataTestId}
                 >
                   {headCell.label}
                 </TableCell>

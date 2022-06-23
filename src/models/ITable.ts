@@ -1,5 +1,6 @@
 export interface IHeadCell {
   id: string;
   label: string;
-  numeric: boolean
+  numeric: boolean;
+  dataTestId: string;
 }

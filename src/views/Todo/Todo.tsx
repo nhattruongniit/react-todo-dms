@@ -25,16 +25,19 @@ const headCells: IHeadCell[] = [
     id: 'title',
     numeric: false,
     label: 'Title',
+    dataTestId: 'title'
   },
   {
     id: 'status',
     numeric: false,
     label: 'Status',
+    dataTestId: 'status'
   },
   {
     id: 'actions',
     numeric: false,
     label: 'Actions',
+    dataTestId: 'actions'
   }
 ];
 
@@ -58,7 +61,7 @@ function Todo() {
             tabIndex={-1}
             key={rowItem.id}
           >
-            <TableCell align="left">{rowItem.title}</TableCell>
+            <TableCell align="left" data-testid="title">{rowItem.title}</TableCell>
             <TableCell 
               align="left"
               sx={{ color: rowItem.completed ? "#4caf50" : "rgba(0, 0, 0, 0.87)" }}

@@ -1,6 +1,6 @@
 # REACT TODO DMS
 
-A simple react boilerplate apps built with React Typescript, redux and MUI.
+A simple react todo apps built by React and MUI.
 
 ## Stack
 
@@ -32,4 +32,7 @@ $ npm start
 
 # build for production
 $ npm run build
+
+# run test
+$ npm run test
 ```
