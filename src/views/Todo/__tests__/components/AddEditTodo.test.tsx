@@ -34,7 +34,7 @@ const Modal = ({handleClose, children}: any) => {
 
 test('render default value', async () => {
   const handleClose = jest.fn();
-
+  // given
   render(
     <Modal handleClose={handleClose}>
       <div>
@@ -66,14 +66,16 @@ test('render default value', async () => {
     </Modal>,
   )
 
+  // when
+  fireEvent.click(screen.getByText(/close/i))
+  // then
   expect(screen.getByTestId('name')).toBeTruthy();
   expect(screen.getByTestId('status')).toBeTruthy();
-  fireEvent.click(screen.getByText(/close/i))
 });
 
 test('render has value after click Edit button', async () => {
   const handleClose = jest.fn();
-
+  // given
   render(
     <Modal handleClose={handleClose}>
       <div>
@@ -104,7 +106,8 @@ test('render has value after click Edit button', async () => {
       </div>
     </Modal>,
   )
-
+  
+  // then
   expect(screen.getByTestId('name')).not.toBeNull();
   expect(screen.getByTestId('status')).not.toBeNull();
 });
