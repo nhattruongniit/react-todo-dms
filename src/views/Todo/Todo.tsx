@@ -8,7 +8,6 @@ import Grid from "@mui/material/Grid";
 
 // components
 import { TableNutrition } from "components/Table";
-import { FabAdd } from "components/Fab";
 
 // context
 import { useTodoContext } from "context/TodoContext";
